@@ -1,0 +1,7 @@
+jsonschema[format-nongpl]>=4.21
+fastjsonschema>=2.19
+referencing>=0.35
+packageurl-python>=0.15
+license-expression>=30.3
+jsonpatch>=1.33
+pyyaml>=6.0

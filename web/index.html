@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SBOM Fixer Dashboard</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232a78d6'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+    <div>
+      <h1>SBOM Fixer</h1>
+      <p>Offline dashboard &middot; works without internet</p>
+    </div>
+  </div>
+  <nav class="topnav" id="topnav" hidden>
+    <a href="#sec-overview">Overview</a>
+    <a href="#sec-problems">Mistakes</a>
+    <a href="#sec-changes">Changes</a>
+    <a href="#sec-ntia">NTIA</a>
+    <a href="#sec-checkmarx">Checkmarx</a>
+    <a href="#sec-graph">Dependencies</a>
+    <a href="#sec-explore">Explore</a>
+  </nav>
+  <div class="topactions">
+    <span class="pill" id="engine-pill" title="Fixer engine version"></span>
+    <button class="icon-btn" id="theme-btn" type="button" aria-label="Switch light / dark theme" title="Switch light / dark theme">
+      <svg id="theme-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- upload -->
+  <section class="upload" id="upload">
+    <div class="drop" id="drop" tabindex="0" role="button" aria-label="Choose or drop SBOM files or a zip">
+      <div class="drop-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M4 15v3a2 2 0 002 2h12a2 2 0 002-2v-3"/></svg>
+      </div>
+      <div class="drop-text">
+        <strong id="drop-title">Drop your SBOM files or a .zip here, or click to choose</strong>
+        <span id="drop-sub">One or many CycloneDX / SPDX 2.x JSON files, or a .zip of them &middot; the files never leave this computer</span>
+      </div>
+      <input type="file" id="file" accept=".json,application/json,.cdx,.spdx,.zip,application/zip" multiple hidden>
+    </div>
+    <div class="upload-opts">
+      <label class="field">
+        <span>Ecosystem</span>
+        <select id="eco"><option value="">Detect automatically</option></select>
+      </label>
+      <div class="samples" id="samples"></div>
+    </div>
+  </section>
+
+  <!-- loading -->
+  <section class="loading" id="loading" hidden>
+    <div class="spinner" aria-hidden="true"></div>
+    <div>
+      <strong id="loading-title">Fixing your SBOM&hellip;</strong>
+      <span id="loading-step">Reading the file</span>
+    </div>
+  </section>
+
+  <!-- error -->
+  <section class="card error-card" id="error" hidden></section>
+
+  <!-- batch of several SBOMs -->
+  <section id="batch" hidden></section>
+
+  <!-- dashboard -->
+  <div id="dash" hidden></div>
+</main>
+
+<footer>
+  <span>SBOM Fixer Dashboard &middot; runs only on this computer, nothing is sent anywhere.</span>
+</footer>
+
+<div id="tip" role="tooltip" hidden></div>
+<script src="app.js"></script>
+</body>
+</html>
